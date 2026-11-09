@@ -1,0 +1,247 @@
+/* Cuvée Masquée : mêmes couleurs et même police que l'app (Manrope, hébergée ici : aucun appel à Google). */
+@font-face {
+  font-family: 'Manrope';
+  src: url('/polices/Manrope_400Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Manrope';
+  src: url('/polices/Manrope_700Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --texte: #1c2420;
+  --texte-2: #5b6660;
+  --fond: #f4f1ea;
+  --surface: #ffffff;
+  --bordure: #ddd8cc;
+  --vert: #2d4b3e;
+  --sur-vert: #ffffff;
+  --bordeaux: #7a2e3a;
+  --info: #e3ece7;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --texte: #eef0ec;
+    --texte-2: #a9b3ad;
+    --fond: #14201b;
+    --surface: #1e2b25;
+    --bordure: #33433b;
+    --vert: #8db8a5;
+    --sur-vert: #10201a;
+    --bordeaux: #d98c98;
+    --info: #22352d;
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--texte);
+  font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+main {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+a {
+  color: var(--vert);
+  font-weight: 700;
+  text-underline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--vert);
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 30px;
+  margin: 8px 0 16px;
+}
+
+h2 {
+  font-size: 21px;
+  margin: 36px 0 8px;
+}
+
+h3 {
+  font-size: 17px;
+  margin: 20px 0 4px;
+  color: var(--texte);
+}
+
+p,
+li {
+  margin: 0 0 12px;
+}
+
+ul,
+ol {
+  padding-left: 22px;
+}
+
+.entete {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--vert);
+  font-size: 19px;
+}
+
+.entete img {
+  height: 44px;
+  width: auto;
+}
+
+.logo {
+  display: block;
+  width: min(360px, 100%);
+  height: auto;
+  margin: 8px auto 24px;
+}
+
+.logo-sombre {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .logo-clair {
+    display: none;
+  }
+  .logo-sombre {
+    display: block;
+  }
+}
+
+.accroche {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.carte {
+  background: var(--surface);
+  border: 1px solid var(--bordure);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+
+.carte > :last-child {
+  margin-bottom: 0;
+}
+
+.encadre {
+  background: var(--info);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 16px 0;
+}
+
+.bouton {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 2px solid var(--vert);
+  background: var(--vert);
+  color: var(--sur-vert);
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 12px 0;
+}
+
+.bouton.secondaire {
+  background: transparent;
+  color: var(--vert);
+}
+
+.code {
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  text-align: center;
+  color: var(--bordeaux);
+  margin: 4px 0 0;
+}
+
+.discret {
+  color: var(--texte-2);
+  font-size: 15px;
+}
+
+.centre {
+  text-align: center;
+}
+
+.cache {
+  display: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+th,
+td {
+  text-align: left;
+  vertical-align: top;
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--bordure);
+}
+
+.tableau {
+  overflow-x: auto;
+}
+
+footer {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+  border-top: 1px solid var(--bordure);
+  color: var(--texte-2);
+  font-size: 14px;
+  text-align: center;
+}
+
+footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 20px;
+  margin-bottom: 12px;
+}
+
+footer a {
+  color: var(--texte-2);
+}

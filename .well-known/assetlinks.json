@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "fr.cuveemasquee.app",
+      "sha256_cert_fingerprints": [
+        "89:8C:21:6E:77:33:E7:8E:4F:4A:6C:9C:70:86:D6:8C:9D:ED:07:5D:8B:CC:E8:FB:65:A7:BA:A7:A1:D1:0A:A8"
+      ]
+    }
+  }
+]

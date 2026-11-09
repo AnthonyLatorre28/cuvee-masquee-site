@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--
+      GitHub Pages sert cette page pour toute adresse inconnue, dont les liens d'invitation /j/CODE.
+      Quand l'app est installée sur Android, ces liens l'ouvrent directement (App Links, voir
+      /.well-known/assetlinks.json) : cette page ne s'affiche donc qu'aux invités sans l'app.
+    -->
+    <title>Invitation · Cuvée Masquée</title>
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#2d4b3e" />
+    <meta property="og:title" content="Invitation à une dégustation à l'aveugle" />
+    <meta property="og:description" content="Rejoignez la soirée sur Cuvée Masquée." />
+    <meta property="og:image" content="https://cuveemasquee.fr/images/icone-512.png" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/images/icone-180.png" />
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/config.js"></script>
+  </head>
+  <body>
+    <main>
+      <a class="entete" href="/"><img src="/images/logo-bouteille.png" alt="" width="275" height="480" /> Cuvée Masquée</a>
+
+      <section id="invitation" class="cache">
+        <h1>Vous êtes invité à une dégustation à l'aveugle</h1>
+
+        <div class="carte centre">
+          <p class="discret">Code de la dégustation</p>
+          <p class="code" id="code"></p>
+          <button class="bouton secondaire" id="copier" type="button">Copier le code</button>
+        </div>
+
+        <div id="pour-android" class="cache">
+          <h2>Vous avez déjà l'app</h2>
+          <a class="bouton" id="ouvrir" href="#">Ouvrir l'invitation dans l'app</a>
+
+          <h2>Pas encore l'app ?</h2>
+          <ol>
+            <li>
+              <a id="apk" href="#">Téléchargez l'app pour Android</a>, puis ouvrez le fichier pour l'installer. L'app est en test et pas encore sur
+              Google Play : Android vous demande d'autoriser l'installation depuis votre navigateur, c'est normal.
+            </li>
+            <li>Ouvrez Cuvée Masquée et créez votre compte.</li>
+            <li>Rouvrez ce lien d'invitation, ou touchez <strong>Rejoindre avec un code</strong> et saisissez le code ci-dessus.</li>
+          </ol>
+        </div>
+
+        <div id="pour-iphone" class="cache encadre">
+          <p>
+            <strong>Cuvée Masquée n'est pas encore disponible sur iPhone.</strong> Elle arrive bientôt sur l'App Store. En attendant, l'hôte peut
+            vous faire participer avec un téléphone Android.
+          </p>
+        </div>
+
+        <div id="pour-ordinateur" class="cache encadre">
+          <p>
+            <strong>Ouvrez ce lien sur votre téléphone Android</strong> pour installer l'app et rejoindre la soirée. La version iPhone arrive
+            bientôt.
+          </p>
+        </div>
+      </section>
+
+      <section id="introuvable" class="cache">
+        <h1>Page introuvable</h1>
+        <p>Cette adresse ne mène nulle part. Si vous avez reçu une invitation, vérifiez que le lien est complet : il se termine par un code de 6 caractères.</p>
+        <a class="bouton" href="/">Revenir à l'accueil</a>
+      </section>
+
+      <noscript>
+        <p>Si vous avez reçu une invitation, ouvrez l'app Cuvée Masquée, touchez « Rejoindre avec un code » et saisissez le code du lien.</p>
+      </noscript>
+    </main>
+
+    <footer>
+      <nav>
+        <a href="/">Accueil</a>
+        <a href="/confidentialite">Confidentialité</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+      <p>Réservé aux personnes majeures. L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</p>
+    </footer>
+
+    <script>
+      (function () {
+        // Même alphabet que les codes de l'app : 6 caractères, sans 0/O, 1/I/L.
+        var trouve = location.pathname.match(/^\/j\/([ABCDEFGHJKMNPQRSTUVWXYZ23456789]{6})\/?$/i);
+        if (!trouve) {
+          document.getElementById('introuvable').classList.remove('cache');
+          document.title = 'Page introuvable · Cuvée Masquée';
+          return;
+        }
+        var code = trouve[1].toUpperCase();
+        var config = window.CUVEE || {};
+        document.getElementById('invitation').classList.remove('cache');
+        document.getElementById('code').textContent = code;
+        document.getElementById('ouvrir').href = 'cuveemasquee://j/' + code;
+        if (config.apkAndroid) {
+          document.getElementById('apk').href = config.apkAndroid;
+        }
+
+        var agent = navigator.userAgent;
+        var bloc = /Android/i.test(agent)
+          ? 'pour-android'
+          : /iPhone|iPad|iPod/i.test(agent) || (/Macintosh/.test(agent) && navigator.maxTouchPoints > 1)
+            ? 'pour-iphone'
+            : 'pour-ordinateur';
+        document.getElementById(bloc).classList.remove('cache');
+
+        var bouton = document.getElementById('copier');
+        bouton.addEventListener('click', function () {
+          var fini = function () {
+            bouton.textContent = 'Code copié';
+            setTimeout(function () {
+              bouton.textContent = 'Copier le code';
+            }, 2000);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(code).then(fini, function () {
+              bouton.textContent = 'Copiez le code à la main';
+            });
+          } else {
+            bouton.textContent = 'Copiez le code à la main';
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
